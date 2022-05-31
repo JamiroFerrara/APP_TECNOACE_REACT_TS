@@ -1,0 +1,44 @@
+$color: #55BCF6;
+$border: 3px solid $color;
+$radius: 5px;
+$padding: 10px;
+$titleSize: 17px;
+$fontSize: 24px;
+$width: 100%;
+$height: auto;
+$margin: 2px;
+
+.container {
+    padding: $padding;
+    border-radius: $radius;
+    border: $border;
+    border-color: rgba(0,0,0,0.05);
+    padding: 1px;
+    width: 50%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textContainer {
+    @extend .container;
+    border: none;
+    padding: 0px;
+    width: 100%;
+    margin: 0px;
+}
+
+.icon {
+    margin: 5px;
+    color: $color;
+}
+
+.title {
+    font-size: $titleSize;
+}
+
+.value {
+    font-size: $fontSize;
+}
