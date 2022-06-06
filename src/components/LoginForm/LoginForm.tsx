@@ -6,6 +6,7 @@ import { UserIcon, PasswordIcon } from "../../utils/icons";
 import { colors } from "../../theme";
 import ImageBanner from "../ImageBanner/ImageBanner";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
   navigation: any;
@@ -31,46 +32,46 @@ export default function LoginForm(props: Props) {
           duration: 350,
         }}
       >
-        <VStack
-          space={3}
-          opacity={0.95}
-          p={10}
-          m={5}
-          shadow={9}
-          borderRadius={10}
-          borderColor="text.600"
-          borderWidth={1}
-          background={colors.primary[800]}
+        <LinearGradient
+          colors={[colors.primary[700], colors.primary[900]]}
+          style={{
+            borderRadius: 10,
+            padding: 10,
+            margin: 25,
+            borderColor: "black",
+          }}
         >
-          <ImageBanner />
+          <VStack space={3} opacity={0.95} p={10} borderRadius={10}>
+            <ImageBanner />
 
-          <FormControl isInvalid={isPasswordError}>
-            <Input
-              placeholder="Username"
-              variant="underlined"
-              placeholderTextColor={colors.primary[100]}
-              InputLeftElement={<Icon as={UserIcon} size={5} ml="2" />}
+            <FormControl isInvalid={isPasswordError}>
+              <Input
+                placeholder="Username"
+                variant="underlined"
+                placeholderTextColor={colors.primary[100]}
+                InputLeftElement={<Icon as={UserIcon} size={5} ml="2" />}
+              />
+              {getErrorMessage("Utente Errato")}
+            </FormControl>
+
+            <FormControl isInvalid={isPasswordError}>
+              <Input
+                mt={2}
+                placeholder="Password"
+                placeholderTextColor={colors.primary[100]}
+                variant="underlined"
+                InputLeftElement={<Icon as={PasswordIcon} size={5} ml="2" />}
+              />
+              {getErrorMessage("Password Errata")}
+            </FormControl>
+
+            <AnimatedButton
+              activeColor={colors.blue[600]}
+              inactiveColor={colors.blue[500]}
+              handleButtonPress={handleButtonPress}
             />
-            {getErrorMessage("Utente Errato")}
-          </FormControl>
-
-          <FormControl isInvalid={isPasswordError}>
-            <Input
-              mt={2}
-              placeholder="Password"
-              placeholderTextColor={colors.primary[100]}
-              variant="underlined"
-              InputLeftElement={<Icon as={PasswordIcon} size={5} ml="2" />}
-            />
-            {getErrorMessage("Password Errata")}
-          </FormControl>
-
-          <AnimatedButton
-            activeColor={colors.blue[600]}
-            inactiveColor={colors.blue[500]}
-            handleButtonPress={handleButtonPress}
-          />
-        </VStack>
+          </VStack>
+        </LinearGradient>
       </MotiView>
     </>
   );

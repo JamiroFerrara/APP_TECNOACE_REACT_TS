@@ -5,7 +5,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import Searchbar from "../components/Searchbar/Searchbar";
 import { useState } from "react";
 import { colors } from "../theme";
-import Spinner from '../components/Spinner/Spinner'
 
 const MarginTop = Platform.OS === 'ios' ? 12 : 0
 

@@ -17,8 +17,8 @@ export default function BackArrow(props: Props) {
   const [isPressed, setIsPressed] = useState(false);
 
   const animStyle = usePress(
-    colors.primary[900],
-    colors.primary[800],
+    "transparent",
+    "transparent",
     isPressed
   );
 

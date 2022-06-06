@@ -11,6 +11,7 @@ import theme, { colors } from "./src/theme";
 import Login from "./src/pages/login-page";
 import Impianti from "./src/pages/impianti-page";
 import Detail from "./src/pages/detail-page";
+import LinearGradient from 'expo-linear-gradient'
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={colors.primary[900]} />
-      <NativeBaseProvider theme={theme}>
+      <NativeBaseProvider theme={theme} config={config}>
         <Stack.Navigator
           initialRouteName="Login"
           screenOptions={{
@@ -41,5 +42,11 @@ function App() {
     </NavigationContainer>
   );
 }
+
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient
+  }
+};
 
 export default App;

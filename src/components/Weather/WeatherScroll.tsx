@@ -1,4 +1,6 @@
 import { ScrollView, Text, View, Image, VStack, HStack } from "native-base";
+import GradientBox from '../GradientBox/GradientBox'
+import {colors} from '../../theme'
 
 interface Props{
     weatherData: any
@@ -16,11 +18,13 @@ export default function WeatherScroll(props: Props) {
 
     return (
       <>
-        <HStack alignSelf={"center"} mb={2}>
-          <Text fontSize={40}>{avgTemperature}</Text>
-          <Text>c</Text>
-          <Image src={"http:" + todayIcon} ml={7} height={16} width={16} alt="Current Weather"/>
-        </HStack>
+        <GradientBox mx={70} mb={10} color1={colors.primary[800]} color2={colors.primary[900]}>
+          <HStack borderRadius={25} alignSelf={"center"}>
+            <Text fontSize={40}>{avgTemperature}</Text>
+            <Text>c</Text>
+            <Image src={"http:" + todayIcon} ml={7} height={16} width={16} alt="Current Weather"/>
+          </HStack>
+        </GradientBox>
 
         <ScrollView alignSelf={"center"} horizontal={true} zIndex={20} nestedScrollEnabled={true}>
           {weatherHour.map((hour:any) => {return (
