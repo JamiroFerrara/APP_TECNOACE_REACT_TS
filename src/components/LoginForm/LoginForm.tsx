@@ -7,6 +7,7 @@ import { colors } from "../../theme";
 import ImageBanner from "../ImageBanner/ImageBanner";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
 import { LinearGradient } from "expo-linear-gradient";
+import {InitConnection} from '../../utils/SignalR'
 
 interface Props {
   navigation: any;
@@ -19,6 +20,7 @@ export default function LoginForm(props: Props) {
   function handleButtonPress() {
     setPasswordError(isPasswordError);
     navigation.navigate("Impianti");
+    InitConnection();
   }
 
   return (

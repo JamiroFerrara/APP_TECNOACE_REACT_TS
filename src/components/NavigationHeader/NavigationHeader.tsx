@@ -1,5 +1,5 @@
 import { Center, Text } from "native-base";
-import BackArrow from "../BackArrow/BackArrow";
+import BackArrow from './BackArrow'
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../../theme";
 

@@ -11,6 +11,7 @@ import theme, { colors } from "./src/theme";
 import Login from "./src/pages/login-page";
 import Impianti from "./src/pages/impianti-page";
 import Detail from "./src/pages/detail-page";
+import Weather from "./src/pages/weather-page";
 import LinearGradient from 'expo-linear-gradient'
 
 const Stack = createStackNavigator();
@@ -37,6 +38,8 @@ function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Impianti" component={Impianti} />
           <Stack.Screen name="Detail" component={Detail} />
+          <Stack.Screen name="Weather" component={Weather} />
+
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

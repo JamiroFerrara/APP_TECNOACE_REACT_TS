@@ -54,7 +54,7 @@ export default function Impianti(props: Props) {
           searchText={searchText}
         ></Searchbar>
 
-        <ScrollView style={{ backgroundColor: colors.primary[900] }}>
+        <ScrollView style={{ backgroundColor: colors.primary[900] }} keyboardShouldPersistTaps={'handled'}>
           <View>
             {filteredItems(searchText).map((item, index) => (
               <ListViewItem

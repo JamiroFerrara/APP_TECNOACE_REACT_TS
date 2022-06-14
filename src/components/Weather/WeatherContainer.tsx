@@ -5,7 +5,12 @@ import { MotiView } from "moti";
 import WeatherDetailItem from "./WeatherDetailItem";
 import { useWeather } from "../../hooks/useWeather";
 
-export default function WeatherContainer() {
+interface Props{
+  navigation: any
+}
+
+export default function WeatherContainer(props: Props) {
+  const {navigation} = props
   const weatherData = useWeather();
 
   if (Object.keys(weatherData).length) {
@@ -27,7 +32,8 @@ export default function WeatherContainer() {
             <Text pb={5} pl={5} pt={2} fontSize={20} mb={2}>
               Meteo
             </Text>
-            <WeatherScroll weatherData={weatherData} />
+
+            <WeatherScroll weatherData={weatherData} navigation={navigation}/>
           </View>
 
           <View>

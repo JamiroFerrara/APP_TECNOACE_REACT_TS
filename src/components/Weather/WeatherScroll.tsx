@@ -1,13 +1,13 @@
-import { ScrollView, Text, View, Image, VStack, HStack } from "native-base";
-import GradientBox from '../GradientBox/GradientBox'
-import {colors} from '../../theme'
+import { ScrollView, Text, View, Image, VStack } from "native-base";
+import WeatherTemp from './WeatherTemperature'
 
 interface Props{
     weatherData: any
+    navigation?: any
 }
 
 export default function WeatherScroll(props: Props) {
-  const {weatherData} = props
+  const {weatherData, navigation} = props
 
   if (Object.keys(weatherData).length){ //is object empty..
   //Split hook data
@@ -18,13 +18,7 @@ export default function WeatherScroll(props: Props) {
 
     return (
       <>
-        <GradientBox mx={70} mb={10} color1={colors.primary[800]} color2={colors.primary[900]}>
-          <HStack borderRadius={25} alignSelf={"center"}>
-            <Text fontSize={40}>{avgTemperature}</Text>
-            <Text>c</Text>
-            <Image src={"http:" + todayIcon} ml={7} height={16} width={16} alt="Current Weather"/>
-          </HStack>
-        </GradientBox>
+        <WeatherTemp avgTemperature={avgTemperature} icon={todayIcon} onPress={()=> {navigation?.navigate("Weather")}}/>
 
         <ScrollView alignSelf={"center"} horizontal={true} zIndex={20} nestedScrollEnabled={true}>
           {weatherHour.map((hour:any) => {return (
