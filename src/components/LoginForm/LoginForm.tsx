@@ -7,7 +7,10 @@ import { colors } from "../../theme";
 import ImageBanner from "../ImageBanner/ImageBanner";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
 import { LinearGradient } from "expo-linear-gradient";
-import {InitConnection} from '../../utils/SignalR'
+import * as sr from '../../server/signalr'
+
+let username = "";
+let password = "";
 
 interface Props {
   navigation: any;
@@ -16,11 +19,21 @@ interface Props {
 export default function LoginForm(props: Props) {
   const { navigation } = props;
   const [isPasswordError, setPasswordError] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
-  function handleButtonPress() {
-    setPasswordError(isPasswordError);
-    navigation.navigate("Impianti");
-    InitConnection();
+  async function handleButtonPress() {
+    setisLoading(true);
+    await sr.InitConnection();
+    const logged = await sr.Login(username, password);
+
+    if (logged){
+      navigation.navigate("Impianti");
+      setPasswordError(false);
+    } else {
+      setPasswordError(true);
+    }
+
+    setisLoading(false);
   }
 
   return (
@@ -48,6 +61,7 @@ export default function LoginForm(props: Props) {
 
             <FormControl isInvalid={isPasswordError}>
               <Input
+                onChangeText={(_username) => username = _username}
                 placeholder="Username"
                 variant="underlined"
                 placeholderTextColor={colors.primary[100]}
@@ -59,6 +73,7 @@ export default function LoginForm(props: Props) {
             <FormControl isInvalid={isPasswordError}>
               <Input
                 mt={2}
+                onChangeText={(_password) => password = _password}
                 placeholder="Password"
                 placeholderTextColor={colors.primary[100]}
                 variant="underlined"
@@ -68,6 +83,7 @@ export default function LoginForm(props: Props) {
             </FormControl>
 
             <AnimatedButton
+              isLoading={isLoading}
               activeColor={colors.blue[600]}
               inactiveColor={colors.blue[500]}
               handleButtonPress={handleButtonPress}
