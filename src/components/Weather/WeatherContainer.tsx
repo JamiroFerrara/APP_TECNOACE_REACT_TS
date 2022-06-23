@@ -7,11 +7,13 @@ import { useWeather } from "../../hooks/useWeather";
 
 interface Props{
   navigation: any
+  lat: string
+  long: string
 }
 
 export default function WeatherContainer(props: Props) {
-  const {navigation} = props
-  const weatherData = useWeather();
+  const {navigation, lat, long} = props
+  const weatherData = useWeather(lat,long);
 
   if (Object.keys(weatherData).length) {
     //is object empty..

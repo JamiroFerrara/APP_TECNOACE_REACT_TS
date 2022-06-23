@@ -5,7 +5,19 @@ import { View } from "native-base";
 import { Dimensions } from "react-native";
 import { colors } from '../../theme'
 
-export default function SolarDayChart() {
+interface Props {
+  chartData?: any
+}
+
+export default function SolarDayChart(props: Props) {
+  const {chartData} = props
+  const arrLength = chartData.length;
+  const arrSplit = Math.round(arrLength / 6);
+
+  console.log(arrLength, arrSplit);
+  console.log(chartData[arrSplit]);
+  console.log(chartData[arrSplit * 2])
+
   return (
     <View mt={5}>
       <LineChart
@@ -14,13 +26,12 @@ export default function SolarDayChart() {
           datasets: [
             {
               data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+                chartData[arrSplit * 1],
+                chartData[arrSplit * 2],
+                chartData[arrSplit * 3],
+                chartData[arrSplit * 4],
+                chartData[arrSplit * 5],
+              ]
             },
           ],
         }}

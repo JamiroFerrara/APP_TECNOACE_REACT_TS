@@ -1,15 +1,42 @@
 import { View, Text, HStack, VStack, Center } from "native-base";
 import SolarPill from "./SolarSelectorPill";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SolarDayChart from './SolarDayChart'
 import SolarWeekChart from './SolarWeekChart'
 import SolarMonthChart from './SolarMonthChart'
+import { GetPlantProductionForGraphs } from '../../server/signalr'
+import { ActivityIndicator } from 'react-native'
 
-export default function SolarSelector() {
+let plantData: any;
+
+interface Props {
+  plantID: number
+}
+
+export default function SolarSelector(props: Props) {
+  const {plantID} = props
   const [index, setIndex] = useState(1);
+  const [isLoading, setisLoading] = useState(true)
+
+  useEffect(()=> {
+    const getGraphData = async () => {
+      var res = await GetPlantProductionForGraphs(plantID);
+      plantData = res;
+      setisLoading(false);
+    }
+    getGraphData();
+  })
 
   function ItemPressed(index: number) {
     setIndex(index);
+  }
+
+  if (isLoading){
+      return(
+      <Center h="40">
+        <ActivityIndicator size={60} color="#FFFFFF"/>
+      </Center>
+      )
   }
 
   return (
@@ -28,11 +55,11 @@ export default function SolarSelector() {
 function getIndexedComponent(index: number) {
   switch (index) {
     case 1:
-      return <SolarDayChart/>;
+      return <SolarDayChart chartData={plantData.plantIntradayData}/>;
     case 2:
-      return <SolarWeekChart/>;
+      return <SolarWeekChart chartDates={plantData.plantDailyDateTime} chartData={plantData.plantDailyProd}/>;
     case 3:
-      return <SolarMonthChart/>;
+      return <SolarMonthChart chartDates={plantData.plantMonthlyMonthName} chartData={plantData.plantMonthlyProd}/>;
   }
 
   return <Text fontSize={40}>???</Text>;

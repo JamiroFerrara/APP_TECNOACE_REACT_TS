@@ -1,13 +1,11 @@
 import { useState, useEffect} from 'react'
 
-const url = "http://api.weatherapi.com/v1/forecast.json?key=ef99587cee9e470ab6475542220106&q=45.611786, 10.483059&days=1&aqi=no&alerts=no";
-
-export function useWeatherHour(setIsLoading:any){
+export function useWeatherHour(setIsLoading:any, lat:string, long:string){
   const [weatherData, setWeatherData] = useState<any[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
-        const response = await fetch(url);
+        const response = await fetch(url(lat,long));
         const json = await response.json();
 
         const d = new Date();
@@ -22,12 +20,12 @@ export function useWeatherHour(setIsLoading:any){
   return weatherData;
 }
 
-export function useWeatherToday(setIsLoading:any){
+export function useWeatherToday(setIsLoading:any, lat: string, long: string){
   const [weatherData, setWeatherData] = useState<any>({})
 
   useEffect(() => {
     const fetchData = async () => {
-        const response = await fetch(url);
+        const response = await fetch(url(lat,long));
         const json = await response.json();
 
         setWeatherData(json.forecast.forecastday[0].day)
@@ -40,12 +38,12 @@ export function useWeatherToday(setIsLoading:any){
   return weatherData;
 }
 
-export function useWeather(){
+export function useWeather(lat: string, long: string){
   const [weatherData, setWeatherData] = useState<any>({})
 
   useEffect(() => {
     const fetchData = async () => {
-        const response = await fetch(url);
+        const response = await fetch(url(lat,long));
         const json = await response.json();
 
         setWeatherData(json)
@@ -55,4 +53,9 @@ export function useWeather(){
   }, []);
 
   return weatherData;
+}
+
+function url(lat: string, long: string){
+  const url = "http://api.weatherapi.com/v1/forecast.json?key=ef99587cee9e470ab6475542220106&q=" + lat + ", " + long +"&days=1&aqi=no&alerts=no";
+  return url;
 }

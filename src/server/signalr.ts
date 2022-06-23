@@ -25,8 +25,25 @@ export async function InitConnection(){
   }
 }
 
+let login: any;
+
 export async function Login(username: string, password: string) : Promise<boolean> {
-  const login = {Username: username, Password: password}
+  login = {Username: username, Password: password}
   const res = await connection.invoke("Login", login);
   return res;
+}
+
+export async function GetListOfConnectedPlants() : Promise<any>{
+  const res = await connection.invoke("GetListOfConnectedPlants", login)
+  return res;
+}
+
+export async function GetPlantDetail(id: number) : Promise<any>{
+  const res = await connection.invoke("GetPlantDetail", login, id)
+  return res
+}
+
+export async function GetPlantProductionForGraphs(plantCode: number){
+  const res = await connection.invoke("GetPlantProductionForGraphs", login, plantCode)
+  return res
 }
