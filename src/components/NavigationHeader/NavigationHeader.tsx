@@ -6,10 +6,11 @@ import { colors } from "../../theme";
 interface Props {
   title: string;
   navigation?: any;
+  mt?: number
 }
 
 export default function NavigationHeader(props: Props) {
-  const { navigation, title } = props;
+  const { navigation, title, mt } = props;
 
   return (
     <LinearGradient
@@ -19,7 +20,7 @@ export default function NavigationHeader(props: Props) {
         opacity: 0.95,
       }}
     >
-      <Center p={3}>
+      <Center p={3} mt={mt}>
         <Text fontSize={25}>{title}</Text>
         <BackArrow onPress={() => navigation.goBack()} />
       </Center>

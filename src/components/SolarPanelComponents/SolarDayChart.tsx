@@ -11,18 +11,25 @@ interface Props {
 
 export default function SolarDayChart(props: Props) {
   const {chartData} = props
+  var date = new Date;
+  var hour = date.getHours();
+
   const arrLength = chartData.length;
   const arrSplit = Math.round(arrLength / 6);
 
-  console.log(arrLength, arrSplit);
-  console.log(chartData[arrSplit]);
-  console.log(chartData[arrSplit * 2])
+  console.log(arrLength, arrSplit, hour, hour / 6);
 
   return (
     <View mt={5}>
       <LineChart
         data={{
-          labels: ["04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+          labels: [
+            String(Math.round(hour / 6) * 1) + ":00 h", 
+            String(Math.round(hour / 6) * 2) + ":00 h",
+            String(Math.round(hour / 6) * 3) + ":00 h",
+            String(Math.round(hour / 6) * 4) + ":00 h",
+            String(Math.round(hour / 6) * 5) + ":00 h",
+          ],
           datasets: [
             {
               data: [
@@ -38,7 +45,7 @@ export default function SolarDayChart(props: Props) {
         width={Dimensions.get("window").width - 25} // from react-native
         height={220}
         yAxisLabel=""
-        yAxisSuffix=" kvH"
+        yAxisSuffix=""
         yAxisInterval={2} // optional, defaults to 1
         chartConfig={{
           backgroundColor: colors.primary[900],

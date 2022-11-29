@@ -9,7 +9,7 @@ import { ResponsePlantList } from '../server/tace_interfaces'
 
 import {GetListOfConnectedPlants} from '../server/signalr'
 
-const MarginTop = Platform.OS === 'ios' ? 12 : 0
+const MarginTop = Platform.OS === 'ios' ? 40 : 0
 
 let items: Array<ResponsePlantList>;
 
@@ -57,7 +57,7 @@ export default function Impianti(props: Props) {
                 onPress={() => itemPressed(item.plantCode)}
                 key={index}
                 text={item.plantDesc}
-                description={item.plantPower + " kvH"}
+                description={item.plantPower + " kWh"}
               ></ListViewItem>
             ))}
           </View>

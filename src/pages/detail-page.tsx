@@ -12,7 +12,7 @@ import {Center} from 'native-base'
 import { GetPlantDetail } from '../server/signalr'
 import { ResponsePlantDetail} from '../server/tace_interfaces'
 
-const MarginTop = Platform.OS === 'ios' ? 12 : 0
+const MarginTop = Platform.OS === 'ios' ? 35 : 0
 
 let plant: any;
 
@@ -46,7 +46,7 @@ function DetailsScreen(props: Props) {
   } else {
     return (
       <>
-        <NavigationHeader title={plant.plantDesc} navigation={navigation} />
+        <NavigationHeader mt={MarginTop} title={plant.plantDesc} navigation={navigation} />
 
         <ScrollView>
           <MapView style={{ height: 160, borderRadius: 50 }}
@@ -57,10 +57,10 @@ function DetailsScreen(props: Props) {
           <GradientBox mx={2} mt={5} color1={colors.primary[800]} color2="transparent" >
             <Text fontSize={23} mb={2}> {" "} Dettaglio Impianti{" "} </Text>
 
-            <WeatherDetailItem title="Produzione Istantanea" value={plant.plantInstantPower} measure="kvh" />
-            <WeatherDetailItem title="Produzione Giornaliera" value={plant.plantDailyProd} measure="kvh" />
-            <WeatherDetailItem title="Produzione Mensile" value={plant.plantMonthlyProd} measure="kvh" />
-            <WeatherDetailItem title="Produzione Annua" value={plant.plantYearlyProd} measure="kvh" />
+            <WeatherDetailItem title="Produzione Istantanea" value={plant.plantInstantPower} measure="kWh" />
+            <WeatherDetailItem title="Produzione Giornaliera" value={plant.plantDailyProd} measure="kWh" />
+            <WeatherDetailItem title="Produzione Mensile" value={plant.plantMonthlyProd} measure="kWh" />
+            <WeatherDetailItem title="Produzione Annua" value={plant.plantYearlyProd} measure="kWh" />
           </GradientBox>
 
           <SolarSelector plantID={plantID}/>

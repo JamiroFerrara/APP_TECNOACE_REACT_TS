@@ -18,7 +18,7 @@ export default function WeatherScroll(props: Props) {
 
     return (
       <>
-        <WeatherTemp avgTemperature={avgTemperature} icon={todayIcon} onPress={()=> {navigation?.navigate("Weather")}}/>
+        <WeatherTemp avgTemperature={avgTemperature} icon={todayIcon}/>
 
         <ScrollView alignSelf={"center"} horizontal={true} zIndex={20} nestedScrollEnabled={true}>
           {weatherHour.map((hour:any) => {return (
